@@ -1,1 +1,129 @@
+$font-family: "Arial", sans-serif;
+$name-color: #2f4f4f;
+$rank-color: #8b0000;
+$sport-color: #000;
 
+$card-bg-color: #eee;
+$rank-bg-color: #fff;
+
+$time-function: 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.body {
+  margin: 0;
+  padding: 0;
+}
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.people {
+  position: relative;
+  z-index: 0;
+
+  display: grid;
+  column-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+  justify-content: center;
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(4, 220px);
+  }
+}
+
+.person {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  width: 220px;
+  padding: 12px 12px 19px;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: all $time-function;
+  will-change: transform;
+
+  &__photo {
+    position: relative;
+
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    transition: all $time-function;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__rank {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    transform: translate(-50%);
+
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $rank-bg-color;
+    color: $rank-color;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  &__name {
+    margin-bottom: 9px;
+
+    color: $name-color;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  &__sport {
+    opacity: 0;
+    height: 24px;
+
+    color: $sport-color;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+
+    transform: translateY(10px);
+    transition: all $time-function;
+  }
+  &:hover {
+    z-index: 10;
+    transform: scale(1.3);
+    background-color: $card-bg-color;
+    .person__photo {
+      border-radius: 60px;
+    }
+    .person__sport {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+}
